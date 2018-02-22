@@ -1,0 +1,36 @@
+{
+  "name": "texting-squirrel",
+  "version": "0.1.0",
+  "description": "Module to format texts with variables and functions. It supports multiple dictionaries.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha __tests__ --recursive --compilers js:babel-core/register",
+    "prepublish": "./node_modules/.bin/babel ./src --out-dir ./dist && echo module.exports = require('./dist'); > index.js",
+    "postpublish": "rm -rf ./dist && rm -f ./index.js"
+  },
+  "author": "Lukáš Mačuda <lukas.macuda@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zabkwak/texting-squirrel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zabkwak/texting-squirrel/issues"
+  },
+  "homepage": "https://github.com/zabkwak/texting-squirrel#readme",
+  "keywords": [
+    "text", "formatting"
+  ],
+  "readme": "README.md"
+}
