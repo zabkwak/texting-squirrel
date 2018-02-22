@@ -74,6 +74,14 @@ describe('Custom functions', () => {
         expect(Text.format('{date()}')).to.be.equal('2018-02-22T22:22:22.000Z');
         expect(Text.format('{date(2018-02-23 23:23:23)}')).to.be.equal('2018-02-23T23:23:23.000Z');
     });
+
+    /*it('adds json function and formats text with it', () => {
+        Text.addFunction('json', (o) => {
+            console.log(JSON.stringify(o));
+            return JSON.stringify(o);
+        });
+        expect(Text.format('{json(0)}', { key: 'value' })).to.be.equal('{"key":"value"}');
+    });*/
 });
 
 describe('Dictionaries', () => {
@@ -98,6 +106,10 @@ describe('Dictionaries', () => {
         expect(Text.get('relation_variable', 6)).to.be.equal('RELATION VARIABLE 6');
         expect(Text.get('fn_count', 3)).to.be.equal('3 variables');
         expect(Text.get('fn_gender', 'female')).to.be.equal('Her variable');
+    });
+
+    it('formats the text using format method and the key in dictionary', () => {
+        expect(Text.format('The key is {key}')).to.be.equal('The key is KEY');
     });
 
     it('adds custom dictionary and gets its values', () => {
