@@ -59,19 +59,19 @@ console.log(Text.format('{date()}')); // will output [actual date in iso format]
 ## Functions
 
 <dl>
-<dt><a href="#addDictionary">addDictionary(key, [dictionary])</a></dt>
+<dt><a href="#addDictionary">addDictionary(key, [dictionary])</a> ⇒ <code>Text</code></dt>
 <dd><p>Adds the new dictionary.</p>
 </dd>
-<dt><a href="#getDictionary">getDictionary(key)</a></dt>
+<dt><a href="#getDictionary">getDictionary(key)</a> ⇒ <code>Dictionary</code></dt>
 <dd><p>Gets the dictionary by the key.</p>
 </dd>
-<dt><a href="#setDictionary">setDictionary(key)</a></dt>
+<dt><a href="#setDictionary">setDictionary(key)</a> ⇒ <code>Text</code></dt>
 <dd><p>Sets the actual dictionary.</p>
 </dd>
-<dt><a href="#addFunction">addFunction(key, fn)</a></dt>
+<dt><a href="#addFunction">addFunction(name, fn)</a> ⇒ <code>Text</code></dt>
 <dd><p>Adds the function.</p>
 </dd>
-<dt><a href="#get">get(key, ...args)</a></dt>
+<dt><a href="#get">get(key, ...args)</a> ⇒ <code>string</code></dt>
 <dd><p>Formats the text from the set dictionary. The text is searched as a value in the dictionary by defined key. If the key is not found in set dictionary it tries to find the text in default dictionary.</p>
 </dd>
 <dt><a href="#format">format(text, ...args)</a> ⇒ <code>string</code></dt>
@@ -80,26 +80,15 @@ If there&#39;s a number in braces the value to replace is searched in the args b
 If it&#39;s a function in the braces the function is called. First parameter accepts number and it&#39;s searched in the args.
 It it&#39;s a string in the braces the value to replace is searched in the set dictionary.</p>
 </dd>
-<dt><a href="#hasValue">hasValue(key)</a></dt>
-<dd><p>Checks if the value is in the dictionary.</p>
-</dd>
-<dt><a href="#isDefault">isDefault()</a></dt>
-<dd><p>Checks if the dictionary is default.</p>
-</dd>
-<dt><a href="#getKey">getKey()</a></dt>
-<dd><p>Gets the key of the dictionary.</p>
-</dd>
-<dt><a href="#getValue">getValue(key)</a></dt>
-<dd><p>Gets the value of the key in dictionary.</p>
-</dd>
 </dl>
 
 <a name="addDictionary"></a>
 
-## addDictionary(key, [dictionary])
+## addDictionary(key, [dictionary]) ⇒ <code>Text</code>
 Adds the new dictionary.
 
 **Kind**: global function
+**Returns**: <code>Text</code> - Instance of the Text class.
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -108,44 +97,48 @@ Adds the new dictionary.
 
 <a name="getDictionary"></a>
 
-## getDictionary(key)
+## getDictionary(key) ⇒ <code>Dictionary</code>
 Gets the dictionary by the key.
 
 **Kind**: global function
+**Returns**: <code>Dictionary</code> - Dictionary instance or null.
 
-| Param | Type |
-| --- | --- |
-| key | <code>string</code> |
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Key of the dictionary. |
 
 <a name="setDictionary"></a>
 
-## setDictionary(key)
+## setDictionary(key) ⇒ <code>Text</code>
 Sets the actual dictionary.
 
 **Kind**: global function
+**Returns**: <code>Text</code> - Instance of the Text class.
 
-| Param | Type |
-| --- | --- |
-| key | <code>string</code> |
+| Param | Type | Description |
+| --- | --- | --- |
+| key | <code>string</code> | Key fo the dictionary. |
 
 <a name="addFunction"></a>
 
-## addFunction(key, fn)
+## addFunction(name, fn) ⇒ <code>Text</code>
 Adds the function.
 
 **Kind**: global function
+**Returns**: <code>Text</code> - Instance of the Text class.
 
-| Param | Type |
-| --- | --- |
-| key | <code>string</code> |
-| fn | <code>function</code> |
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the function. |
+| fn | <code>function</code> | Function to execute. |
 
 <a name="get"></a>
 
-## get(key, ...args)
+## get(key, ...args) ⇒ <code>string</code>
 Formats the text from the set dictionary. The text is searched as a value in the dictionary by defined key. If the key is not found in set dictionary it tries to find the text in default dictionary.
 
 **Kind**: global function
+**Returns**: <code>string</code> - Formatted text.
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -158,11 +151,12 @@ Formats the text from the set dictionary. The text is searched as a value in the
 If there's a number in braces the value to replace is searched in the args by orIf it's a function in the braces the function is called. First parameter acceptsIt it's a string in the braces the value to replace is searched in the set dictionary.
 
 **Kind**: global function
+**Returns**: <code>string</code> - Formatted text.
 
-| Param | Type |
-| --- | --- |
-| text | <code>string</code> |
-| ...args | <code>\*</code> |
+| Param | Type | Description |
+| --- | --- | --- |
+| text | <code>string</code> | Text to format. |
+| ...args | <code>\*</code> | Arguments to pass in the text by index. |
 
 **Example** *(Passing variables)*
 ```js
@@ -177,36 +171,4 @@ Text.format('{count(0, script, scripts, scripts)}', 5); // returns 5 scripts
 ```js
 Text.format('{gender(0, He, She, He/She)} codes', 'female'); //returns She codes
 ```
-<a name="hasValue"></a>
 
-## hasValue(key)
-Checks if the value is in the dictionary.
-
-**Kind**: global function
-
-| Param | Type |
-| --- | --- |
-| key | <code>string</code> |
-
-<a name="isDefault"></a>
-
-## isDefault()
-Checks if the dictionary is default.
-
-**Kind**: global function
-<a name="getKey"></a>
-
-## getKey()
-Gets the key of the dictionary.
-
-**Kind**: global function
-<a name="getValue"></a>
-
-## getValue(key)
-Gets the value of the key in dictionary.
-
-**Kind**: global function
-
-| Param | Type |
-| --- | --- |
-| key | <code>string</code> |

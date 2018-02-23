@@ -21,6 +21,7 @@ export default class Text {
      * 
      * @param {string|Object.<string, string>} key Key with which is the dictionary accesible to format texts. If it's an object, the key is default.
      * @param {Object.<string, string>} [dictionary] Key-value object for mapping the texts.
+     * @returns {Text} Instance of the Text class.
      */
     addDictionary(key, dictionary) {
         if (typeof key !== 'string') {
@@ -34,16 +35,18 @@ export default class Text {
     /**
      * Gets the dictionary by the key.
      * 
-     * @param {string} key 
+     * @param {string} key Key of the dictionary.
+     * @returns {Dictionary} Dictionary instance or null.
      */
     getDictionary(key = this._dictionary) {
-        return this._dictionaries[key];
+        return this._dictionaries[key] || null;
     }
 
     /**
      * Sets the actual dictionary.
      * 
-     * @param {string} key 
+     * @param {string} key Key fo the dictionary.
+     * @returns {Text} Instance of the Text class.
      */
     setDictionary(key) {
         if (!this._dictionaries[key]) {
@@ -57,11 +60,12 @@ export default class Text {
     /**
      * Adds the function.
      * 
-     * @param {string} key 
-     * @param {Function} fn 
+     * @param {string} name Name of the function.
+     * @param {Function} fn Function to execute.
+     * @returns {Text} Instance of the Text class.
      */
-    addFunction(key, fn) {
-        this._functions[key] = fn;
+    addFunction(name, fn) {
+        this._functions[name] = fn;
         return this;
     }
 
@@ -70,6 +74,7 @@ export default class Text {
      * 
      * @param {string} key Key of the text in the dictionary.
      * @param {...*} args Arguments to pass in format method.
+     * @returns {string} Formatted text.
      */
     get(key, ...args) {
         let dictionary = this.getDictionary() || this.getDictionary(Dictionary.DEFAULT);
@@ -103,9 +108,9 @@ export default class Text {
      * @example <caption>Gender function</caption>
      * Text.format('{gender(0, He, She, He/She)} codes', 'female'); //returns She codes
      * 
-     * @param {string} text 
-     * @param {...*} args 
-     * @returns {string}
+     * @param {string} text Text to format.
+     * @param {...*} args Arguments to pass in the text by index.
+     * @returns {string} Formatted text.
      */
     format(text, ...args) {
         if (!text) {
