@@ -1,6 +1,6 @@
 {
   "name": "texting-squirrel",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Module to format texts with variables and functions. It supports multiple dictionaries.",
   "main": "index.js",
   "scripts": {
