@@ -23,6 +23,10 @@ describe('Base functions', () => {
     it('formats the text with two variables and reversed order', () => {
         expect(Text.format('Test {1} {0}', 'first', 'second')).to.be.equal('Test second first');
     });
+
+    it('formats the text with two variables which are not set', () => {
+        expect(Text.format('First parameter: {0}; Second parameter: {1};')).to.be.equal('First parameter: ; Second parameter: ;');
+    });
 });
 
 describe('Built-in functions', () => {

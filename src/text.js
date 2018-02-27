@@ -143,6 +143,6 @@ export default class Text {
                 }
             });
         }
-        return text.replace(/{(.+)\}/, '');
+        return text.replace(/{(.+?)\}/g, '');
     }
 }
