@@ -3,6 +3,7 @@
   "version": "0.1.3",
   "description": "Module to format texts with variables and functions. It supports multiple dictionaries.",
   "main": "index.js",
+  "types": "./dist/__types__/index.d.ts",
   "scripts": {
     "test": "mocha __tests__ --recursive --compilers js:babel-core/register",
     "prepublish": "./node_modules/.bin/babel ./src --out-dir ./dist --copy-files && echo module.exports = require('./dist'); > index.js",
