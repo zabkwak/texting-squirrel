@@ -11,7 +11,7 @@ declare module 'texting-squirrel' {
 
         getKey(): string;
 
-        getValue(string: key): string;
+        getValue(key: string): string;
     }
 
     class Text {
@@ -33,5 +33,6 @@ declare module 'texting-squirrel' {
     }
 
     const T: Text;
-    export default T;
+	export default T;
+	export type TextType = Text;
 }
