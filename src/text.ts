@@ -113,15 +113,21 @@ export default class Text {
 	 * First parameter accepts number and it's searched in the args.
 	 * It it's a string in the braces the value to replace is searched in the set dictionary.
 	 *
-	 * @example <caption>Passing variables</caption>
+	 * @example
+	 * ```javascript
 	 * Text.format('{0}', 'one'); // returns one
 	 * Text.format('{0} {1} {2}', 'one', 'two', 'three'); // returns one two three
+	 * ```
 	 *
-	 * @example <caption>Count function</caption>
+	 * @example
+	 * ```javascript
 	 * Text.format('{count(0, script, scripts, scripts)}', 5); // returns 5 scripts
+	 * ```
 	 *
-	 * @example <caption>Gender function</caption>
+	 * @example
+	 * ```javascript
 	 * Text.format('{gender(0, He, She, He/She)} codes', 'female'); //returns She codes
+	 * ```
 	 *
 	 * @param text Text to format.
 	 * @param args Arguments to pass in the text by index.

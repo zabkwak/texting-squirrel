@@ -1,0 +1,443 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>texting-squirrel</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">texting-squirrel</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> texting-squirrel</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#texting-squirrel" id="texting-squirrel" style="color: inherit; text-decoration: none;">
+					<h1>Texting Squirrel</h1>
+				</a>
+				<p>Module to format texts with variables and functions. It supports multiple dictionaries.</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code class="language-bash">$ npm install texting-squirrel</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> Text <span class="hljs-keyword">from</span> <span class="hljs-string">'texting-squirrel'</span>;
+
+<span class="hljs-built_in">console</span>.log(Text.format(<span class="hljs-string">'Hi, {0}!'</span>, <span class="hljs-string">'developer'</span>)); <span class="hljs-comment">// will output Hi, developer!</span>
+
+Text.addDictionary(<span class="hljs-string">'test'</span>, { <span class="hljs-attr">module_name</span>: <span class="hljs-string">'Texting Squirrel'</span> });
+Text.setDictionary(<span class="hljs-string">'test'</span>);
+
+<span class="hljs-built_in">console</span>.log(Text.get(<span class="hljs-string">'module_name'</span>)); <span class="hljs-comment">// will output Texting Squirrel</span>
+<span class="hljs-built_in">console</span>.log(Text.format(<span class="hljs-string">'I am using {module_name} module'</span>)); <span class="hljs-comment">// will output I am using Texting Squirrel</span></code></pre>
+				<a href="#text-functions" id="text-functions" style="color: inherit; text-decoration: none;">
+					<h2>Text functions</h2>
+				</a>
+				<p>Functions can be registered to the module. The texts can be updated with those funtions</p>
+				<a href="#countindex-a-b-c" id="countindex-a-b-c" style="color: inherit; text-decoration: none;">
+					<h3>count(index, a, b, c)</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Param</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>index</td>
+							<td><code>number</code></td>
+							<td>Index in the args of the format function</td>
+						</tr>
+						<tr>
+							<td>a</td>
+							<td><code>string</code></td>
+							<td>Text which will be returned if the value is equal to <code>1</code></td>
+						</tr>
+						<tr>
+							<td>b</td>
+							<td><code>string</code></td>
+							<td>Text which will be returned if the value is equal to <code>2</code>, <code>3</code> or <code>4</code></td>
+						</tr>
+						<tr>
+							<td>c</td>
+							<td><code>string</code></td>
+							<td>Text which will be returned if the value is equal to <code>0</code> or bigger than <code>4</code></td>
+						</tr>
+				</tbody></table>
+				<a href="#genderindex-a-b-c" id="genderindex-a-b-c" style="color: inherit; text-decoration: none;">
+					<h3>gender(index, a, b, c)</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Param</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>index</td>
+							<td><code>number</code></td>
+							<td>Index in the args of the format function</td>
+						</tr>
+						<tr>
+							<td>a</td>
+							<td><code>string</code></td>
+							<td>Text which will be returned if the value is equal to <code>male</code></td>
+						</tr>
+						<tr>
+							<td>b</td>
+							<td><code>string</code></td>
+							<td>Text which will be returned if the value is equal to <code>female</code></td>
+						</tr>
+						<tr>
+							<td>c</td>
+							<td><code>string</code></td>
+							<td>Text which will be returned if the value is not defined or something else than <code>male</code> or <code>female</code></td>
+						</tr>
+				</tbody></table>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> Text <span class="hljs-keyword">from</span> <span class="hljs-string">'texting-squirrel'</span>;
+
+<span class="hljs-built_in">console</span>.log(Text.format(<span class="hljs-string">'{count(0, script, scripts, scripts)}'</span>, <span class="hljs-number">5</span>)); <span class="hljs-comment">// will output 5 scripts</span>
+<span class="hljs-built_in">console</span>.log(Text.format(<span class="hljs-string">'{gender(0, He, She, He/She)} codes'</span>, <span class="hljs-string">'female'</span>)); <span class="hljs-comment">// will output She codes</span></code></pre>
+				<a href="#custom-functions" id="custom-functions" style="color: inherit; text-decoration: none;">
+					<h3>Custom functions</h3>
+				</a>
+				<p>Custom functions can be registered and called</p>
+				<pre><code class="language-javascript">Text.addFunction(<span class="hljs-string">'date'</span>, () =&gt; <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toISOString());
+<span class="hljs-built_in">console</span>.log(Text.format(<span class="hljs-string">'{date()}'</span>)); <span class="hljs-comment">// will output [actual date in iso format]</span></code></pre>
+				<a href="#todo" id="todo" style="color: inherit; text-decoration: none;">
+					<h2>TODO</h2>
+				</a>
+				<ul>
+					<li>passing JSON in the text -&gt; every text in braces is cleared</li>
+				</ul>
+				<a href="#functions" id="functions" style="color: inherit; text-decoration: none;">
+					<h2>Functions</h2>
+				</a>
+				<dl>
+					<dt><a href="#addDictionary">addDictionary(key, [dictionary])</a> ⇒ <code>Text</code></dt>
+					<dd><p>Adds the new dictionary.</p>
+					</dd>
+					<dt><a href="#getDictionary">getDictionary(key)</a> ⇒ <code>Dictionary</code></dt>
+					<dd><p>Gets the dictionary by the key.</p>
+					</dd>
+					<dt><a href="#setDictionary">setDictionary(key)</a> ⇒ <code>Text</code></dt>
+					<dd><p>Sets the actual dictionary.</p>
+					</dd>
+					<dt><a href="#addFunction">addFunction(name, fn)</a> ⇒ <code>Text</code></dt>
+					<dd><p>Adds the function.</p>
+					</dd>
+					<dt><a href="#get">get(key, ...args)</a> ⇒ <code>string</code></dt>
+					<dd><p>Formats the text from the set dictionary. The text is searched as a value in the dictionary by defined key. If the key is not found in set dictionary it tries to find the text in default dictionary.</p>
+					</dd>
+					<dt><a href="#format">format(text, ...args)</a> ⇒ <code>string</code></dt>
+					<dd><p>Formats the text. Data to format must be in braces.
+							If there&#39;s a number in braces the value to replace is searched in the args by order in array.
+							If it&#39;s a function in the braces the function is called. First parameter accepts number and it&#39;s searched in the args.
+						It it&#39;s a string in the braces the value to replace is searched in the set dictionary.</p>
+					</dd>
+				</dl>
+				<p><a name="addDictionary"></a></p>
+				<a href="#adddictionarykey-dictionary-⇒-codetextcode" id="adddictionarykey-dictionary-⇒-codetextcode" style="color: inherit; text-decoration: none;">
+					<h2>addDictionary(key, [dictionary]) ⇒ <code>Text</code></h2>
+				</a>
+				<p>Adds the new dictionary.</p>
+				<p><strong>Kind</strong>: global function
+				<strong>Returns</strong>: <code>Text</code> - Instance of the Text class.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Param</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>key</td>
+							<td><code>string</code> | <code>Object.&lt;string, string&gt;</code></td>
+							<td>Key with which is the dictionary accesible to format texts. If it&#39;s an object, the key is default.</td>
+						</tr>
+						<tr>
+							<td>[dictionary]</td>
+							<td><code>Object.&lt;string, string&gt;</code></td>
+							<td>Key-value object for mapping the texts.</td>
+						</tr>
+				</tbody></table>
+				<p><a name="getDictionary"></a></p>
+				<a href="#getdictionarykey-⇒-codedictionarycode" id="getdictionarykey-⇒-codedictionarycode" style="color: inherit; text-decoration: none;">
+					<h2>getDictionary(key) ⇒ <code>Dictionary</code></h2>
+				</a>
+				<p>Gets the dictionary by the key.</p>
+				<p><strong>Kind</strong>: global function
+				<strong>Returns</strong>: <code>Dictionary</code> - Dictionary instance or null.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Param</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>key</td>
+							<td><code>string</code></td>
+							<td>Key of the dictionary.</td>
+						</tr>
+				</tbody></table>
+				<p><a name="setDictionary"></a></p>
+				<a href="#setdictionarykey-⇒-codetextcode" id="setdictionarykey-⇒-codetextcode" style="color: inherit; text-decoration: none;">
+					<h2>setDictionary(key) ⇒ <code>Text</code></h2>
+				</a>
+				<p>Sets the actual dictionary.</p>
+				<p><strong>Kind</strong>: global function
+				<strong>Returns</strong>: <code>Text</code> - Instance of the Text class.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Param</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>key</td>
+							<td><code>string</code></td>
+							<td>Key fo the dictionary.</td>
+						</tr>
+				</tbody></table>
+				<p><a name="addFunction"></a></p>
+				<a href="#addfunctionname-fn-⇒-codetextcode" id="addfunctionname-fn-⇒-codetextcode" style="color: inherit; text-decoration: none;">
+					<h2>addFunction(name, fn) ⇒ <code>Text</code></h2>
+				</a>
+				<p>Adds the function.</p>
+				<p><strong>Kind</strong>: global function
+				<strong>Returns</strong>: <code>Text</code> - Instance of the Text class.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Param</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>name</td>
+							<td><code>string</code></td>
+							<td>Name of the function.</td>
+						</tr>
+						<tr>
+							<td>fn</td>
+							<td><code>function</code></td>
+							<td>Function to execute.</td>
+						</tr>
+				</tbody></table>
+				<p><a name="get"></a></p>
+				<a href="#getkey-args-⇒-codestringcode" id="getkey-args-⇒-codestringcode" style="color: inherit; text-decoration: none;">
+					<h2>get(key, ...args) ⇒ <code>string</code></h2>
+				</a>
+				<p>Formats the text from the set dictionary. The text is searched as a value in the dictionary by defined key. If the key is not found in set dictionary it tries to find the text in default dictionary.</p>
+				<p><strong>Kind</strong>: global function
+				<strong>Returns</strong>: <code>string</code> - Formatted text.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Param</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>key</td>
+							<td><code>string</code></td>
+							<td>Key of the text in the dictionary.</td>
+						</tr>
+						<tr>
+							<td>...args</td>
+							<td><code>*</code></td>
+							<td>Arguments to pass in format method.</td>
+						</tr>
+				</tbody></table>
+				<p><a name="format"></a></p>
+				<a href="#formattext-args-⇒-codestringcode" id="formattext-args-⇒-codestringcode" style="color: inherit; text-decoration: none;">
+					<h2>format(text, ...args) ⇒ <code>string</code></h2>
+				</a>
+				<p>If there&#39;s a number in braces the value to replace is searched in the args by orIf it&#39;s a function in the braces the function is called. First parameter acceptsIt it&#39;s a string in the braces the value to replace is searched in the set dictionary.</p>
+				<p><strong>Kind</strong>: global function
+				<strong>Returns</strong>: <code>string</code> - Formatted text.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Param</th>
+							<th>Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>text</td>
+							<td><code>string</code></td>
+							<td>Text to format.</td>
+						</tr>
+						<tr>
+							<td>...args</td>
+							<td><code>*</code></td>
+							<td>Arguments to pass in the text by index.</td>
+						</tr>
+				</tbody></table>
+				<p><strong>Example</strong> <em>(Passing variables)</em></p>
+				<pre><code class="language-js">Text.format(<span class="hljs-string">'{0}'</span>, <span class="hljs-string">'one'</span>); <span class="hljs-comment">// returns one</span>
+Text.format(<span class="hljs-string">'{0} {1} {2}'</span>, <span class="hljs-string">'one'</span>, <span class="hljs-string">'two'</span>, <span class="hljs-string">'three'</span>); <span class="hljs-comment">// returns one two three</span></code></pre>
+				<p><strong>Example</strong> <em>(Count function)</em></p>
+				<pre><code class="language-js">Text.format(<span class="hljs-string">'{count(0, script, scripts, scripts)}'</span>, <span class="hljs-number">5</span>); <span class="hljs-comment">// returns 5 scripts</span></code></pre>
+				<p><strong>Example</strong> <em>(Gender function)</em></p>
+				<pre><code class="language-js">Text.format(<span class="hljs-string">'{gender(0, He, She, He/She)} codes'</span>, <span class="hljs-string">'female'</span>); <span class="hljs-comment">//returns She codes</span></code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_dictionary_.html">&quot;dictionary&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_text_.html">&quot;text&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
