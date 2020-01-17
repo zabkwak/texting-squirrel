@@ -96,7 +96,7 @@ describe('Dictionaries', () => {
 		relation: 'RELATION {key}',
 		relation_variable: 'RELATION {variable}',
 		fn_count: '{count(0,variable, variables, variables)}',
-		fn_gender: '{gender(0,His,Her,His/Her)} variable'
+		fn_gender: '{gender(0,His,Her,His/Her)} variable',
 	});
 
 	it('tries to get the text from non existing dictionary', () => {
@@ -125,6 +125,16 @@ describe('Dictionaries', () => {
 		expect(Text.get('relation_variable', 6)).to.be.equal('RELATION VARIABLE 6');
 		expect(Text.get('fn_count', 3)).to.be.equal('3 variables');
 		expect(Text.get('fn_gender', 'female')).to.be.equal('Her variable');
+	});
+
+	it('gets the test from custom dictionary not set globally', () => {
+		Text.addDictionary('custom_2', { key: 'key 2' });
+		expect(Text.getFromDictionary('custom_2', 'key')).to.be.equal('key 2');
+		expect(Text.getFromDictionary('custom_2', 'variable', 5)).to.be.equal('');
+		expect(Text.getFromDictionary('custom_2', 'relation')).to.be.equal('');
+		expect(Text.getFromDictionary('custom_2', 'relation_variable', 6)).to.be.equal('');
+		expect(Text.getFromDictionary('custom_2', 'fn_count', 3)).to.be.equal('');
+		expect(Text.getFromDictionary('custom_2', 'fn_gender', 'female')).to.be.equal('');
 	});
 
 });

@@ -11,7 +11,7 @@ export default class Text {
 	/**
 	 * Adds the new dictionary.
 	 *
-	 * @param  key Key with which is the dictionary accesible to format texts. If it's an object, the key is default.
+	 * @param  key Key with which is the dictionary accessible to format texts. If it's an object, the key is default.
 	 * @param dictionary Key-value object for mapping the texts.
 	 * @returns Instance of the Text class.
 	 */
@@ -77,6 +77,27 @@ export default class Text {
 		}
 		if (!dictionary.hasValue(key) && !dictionary.isDefault()) {
 			dictionary = this.getDictionary(Dictionary.DEFAULT);
+		}
+		if (!dictionary.hasValue(key)) {
+			console.warn(`Key '${key}' not found in dictionary '${dictionary.getKey()}'`);
+			return '';
+		}
+		return this.format(dictionary.getValue(key), ...args);
+	}
+
+	/**
+	 * Formats the text from the defined dictionary.
+	 * The text is not searched in the default dictionary if not found.
+	 *
+	 * @param dictionaryKey Dictionary key.
+	 * @param key Key of the text in the dictionary.
+	 * @param args Arguments to pass in format method.
+	 * @returns Formatted text.
+	 */
+	public getFromDictionary(dictionaryKey: string, key: string, ...args: Array<any>): string {
+		const dictionary = this.getDictionary(dictionaryKey);
+		if (!dictionary) {
+			throw new Error(`Dictionary '${dictionaryKey}' doesn't exist.`);
 		}
 		if (!dictionary.hasValue(key)) {
 			console.warn(`Key '${key}' not found in dictionary '${dictionary.getKey()}'`);

@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "Module to format texts with variables and functions. It supports multiple dictionaries.",
 	"main": "index.js",
-	"types": "./dist/__types__/index.d.ts",
+	"types": "./dist/index.d.ts",
 	"scripts": {
 		"create_index": "run-script-os",
 		"create_index:win32": "echo module.exports = require('./dist'); > index.js",

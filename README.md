@@ -46,7 +46,7 @@ console.log(Text.format('{gender(0, He, She, He/She)} codes', 'female')); // wil
 ```
 
 ### Custom functions
-Custom fuctions can be registered and called
+Custom functions can be registered and called
 
 ```javascript
 Text.addFunction('date', () => new Date().toISOString());
