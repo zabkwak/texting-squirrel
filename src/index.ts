@@ -1,5 +1,7 @@
 import Text from './text';
 
+export type TextType = Text;
+
 export default new Text()
 	.addFunction('count', (count: number, a: string, b: string, c: string) => {
 		if (count === 1) {
