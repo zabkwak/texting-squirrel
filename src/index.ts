@@ -9,7 +9,8 @@ export default new Text()
 			return `${count} ${c}`;
 		}
 		return `${count} ${b}`;
-	}).addFunction('gender', (gender: string, a: string, b: string, c: string) => {
+	})
+	.addFunction('gender', (gender: string, a: string, b: string, c: string) => {
 		switch (gender) {
 			case 'male': return a;
 			case 'female': return b;

@@ -100,6 +100,8 @@ describe('Dictionaries', () => {
 	});
 
 	it('tries to get the text from non existing dictionary', () => {
+		expect(Text.get('non_existing')).to.be.equal('[non_existing]');
+		Text.setMode('production');
 		expect(Text.get('non_existing')).to.be.equal('');
 	});
 

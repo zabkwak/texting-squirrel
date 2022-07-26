@@ -1,12 +1,39 @@
 import Dictionary from './dictionary';
 
+export type TMode = 'dev' | 'production';
+
 export default class Text {
 
 	private _dictionary: string = Dictionary.DEFAULT;
 
 	private _dictionaries: { [key: string]: Dictionary } = {};
 
-	private _functions: { [key: string]: (...args: Array<any>) => string } = {};
+	private _functions: { [key: string]: (...args: any[]) => string } = {};
+
+	private _mode: TMode = 'dev';
+
+	/**
+	 * Sets the mode of the module.
+	 *
+	 * If the app is in `dev` mode, warnings are logged to `console` and not-existing texts are returned as the key.
+	 * Otherwise in `production` mode no logs are printed and non-existing texts are returned as empty string.
+	 *
+	 * @param mode The mode to set one of `dev` or `production`. Default is `dev`.
+	 * @returns Instance of the Text class.
+	 */
+	public setMode(mode: TMode): this {
+		this._mode = mode;
+		return this;
+	}
+
+	/**
+	 * Gets the current mode of the Text class.
+	 *
+	 * @returns The current mode of the Text class.
+	 */
+	public getMode(): TMode {
+		return this._mode;
+	}
 
 	/**
 	 * Adds the new dictionary.
@@ -42,8 +69,8 @@ export default class Text {
 	 */
 	public setDictionary(key: string): this {
 		if (!this._dictionaries[key]) {
-			console.warn(`Dictionary with key '${key}' doesn't exist`);
-			return;
+			this._warn(`Dictionary with key '${key}' doesn't exist`);
+			return this;
 		}
 		this._dictionary = key;
 		return this;
@@ -56,7 +83,7 @@ export default class Text {
 	 * @param fn Function to execute.
 	 * @returns Instance of the Text class.
 	 */
-	public addFunction(name: string, fn: (...args: Array<any>) => string): this {
+	public addFunction(name: string, fn: (...args: any[]) => string): this {
 		this._functions[name] = fn;
 		return this;
 	}
@@ -69,18 +96,20 @@ export default class Text {
 	 * @param args Arguments to pass in format method.
 	 * @returns Formatted text.
 	 */
-	public get(key: string, ...args: Array<any>): string {
+	public get(key: string, ...args: any[]): string {
 		let dictionary = this.getDictionary() || this.getDictionary(Dictionary.DEFAULT);
 		if (!dictionary) {
-			console.warn('No dictionary set');
+			this._warn('No dictionary set');
 			return '';
 		}
 		if (!dictionary.hasValue(key) && !dictionary.isDefault()) {
 			dictionary = this.getDictionary(Dictionary.DEFAULT);
 		}
 		if (!dictionary.hasValue(key)) {
-			console.warn(`Key '${key}' not found in dictionary '${dictionary.getKey()}'`);
-			return '';
+			this._warn(`Key '${key}' not found in dictionary '${dictionary.getKey()}'`);
+			return this._mode === 'production'
+				? ''
+				: `[${key}]`;
 		}
 		return this.format(dictionary.getValue(key), ...args);
 	}
@@ -94,14 +123,16 @@ export default class Text {
 	 * @param args Arguments to pass in format method.
 	 * @returns Formatted text.
 	 */
-	public getFromDictionary(dictionaryKey: string, key: string, ...args: Array<any>): string {
+	public getFromDictionary(dictionaryKey: string, key: string, ...args: any[]): string {
 		const dictionary = this.getDictionary(dictionaryKey);
 		if (!dictionary) {
 			throw new Error(`Dictionary '${dictionaryKey}' doesn't exist.`);
 		}
 		if (!dictionary.hasValue(key)) {
-			console.warn(`Key '${key}' not found in dictionary '${dictionary.getKey()}'`);
-			return '';
+			this._warn(`Key '${key}' not found in dictionary '${dictionary.getKey()}'`);
+			return this._mode === 'production'
+				? ''
+				: `[${key}]`;
 		}
 		return this.format(dictionary.getValue(key), ...args);
 	}
@@ -133,7 +164,7 @@ export default class Text {
 	 * @param args Arguments to pass in the text by index.
 	 * @returns Formatted text.
 	 */
-	public format(text: string, ...args: Array<any>): string {
+	public format(text: string, ...args: any[]): string {
 		if (!text) {
 			return '';
 		}
@@ -149,7 +180,7 @@ export default class Text {
 					// TODO validate?
 					const fn = m.match(/(\w+)/)[0];
 					// TODO validate?
-					const params: Array<any> = m.match(/(\(.*\))/)[0].slice(1, -1).split(',').map((item) => item.trim());
+					const params: any[] = m.match(/(\(.*\))/)[0].slice(1, -1).split(',').map((item) => item.trim());
 					if (params.length && !isNaN(params[0])) {
 						params[0] = args[params[0]];
 					}
@@ -157,7 +188,7 @@ export default class Text {
 					if (caller) {
 						text = text.replace(m, caller.apply(this, params));
 					} else {
-						console.warn(`Invalid function '${fn}'`);
+						this._warn(`Invalid function '${fn}'`);
 					}
 				} else if (/{\w+}/.test(m)) {
 					text = text.replace(m, this.get(m.slice(1, -1), ...args));
@@ -165,5 +196,12 @@ export default class Text {
 			});
 		}
 		return text.replace(/{(.+?)\}/g, '');
+	}
+
+	private _warn(message: any, ...optionalParams: any[]): void {
+		if (this._mode === 'production') {
+			return;
+		}
+		console.warn(message, ...optionalParams);
 	}
 }

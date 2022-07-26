@@ -19,8 +19,11 @@ console.log(Text.get('module_name')); // will output Texting Squirrel
 console.log(Text.format('I am using {module_name} module')); // will output I am using Texting Squirrel
 ```
 
+### Mode
+The text module can be set in two modes `production` or `dev` with `setMode` method. In the `dev` mode warnings are logged in console and if the text is not found in dictionary the key is returned instead of empty string.
+
 ## Text functions
-Functions can be registered to the module. The texts can be updated with those funtions
+Functions can be registered to the module. The texts can be updated with those functions.
 
 ### count(index, a, b, c)
 | Param | Type | Description |
