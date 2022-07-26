@@ -27,6 +27,13 @@ describe('Base functions', () => {
 	it('formats the text with two variables which are not set', () => {
 		expect(Text.format('First parameter: {0}; Second parameter: {1};')).to.be.equal('First parameter: ; Second parameter: ;');
 	});
+
+	it('creates key from fragments', () => {
+		expect(Text.key()).to.be.equal('');
+		expect(Text.key('text')).to.be.equal('text');
+		expect(Text.key('text', 'module')).to.be.equal('text_module');
+		expect(Text.key('text', 'module', 666)).to.be.equal('text_module_666');
+	});
 });
 
 describe('Built-in functions', () => {
@@ -79,13 +86,15 @@ describe('Custom functions', () => {
 		expect(Text.format('{date(2018-02-23 23:23:23)}')).to.be.equal('2018-02-23T22:23:23.000Z');
 	});
 
-    /*it('adds json function and formats text with it', () => {
-        Text.addFunction('json', (o) => {
-            console.log(JSON.stringify(o));
-            return JSON.stringify(o);
-        });
-        expect(Text.format('{json(0)}', { key: 'value' })).to.be.equal('{"key":"value"}');
-    });*/
+	/*
+	it('adds json function and formats text with it', () => {
+		Text.addFunction('json', (o) => {
+			console.log(JSON.stringify(o));
+			return JSON.stringify(o);
+		});
+		expect(Text.format('{json(0)}', { key: 'value' })).to.be.equal('{"key":"value"}');
+	});
+	*/
 });
 
 describe('Dictionaries', () => {
@@ -97,7 +106,11 @@ describe('Dictionaries', () => {
 		relation_variable: 'RELATION {variable}',
 		fn_count: '{count(0,variable, variables, variables)}',
 		fn_gender: '{gender(0,His,Her,His/Her)} variable',
+		status_ok: 'OK',
+		status_error: 'ERROR',
 	});
+
+	const statuses = { ok: 'OK', error: 'ERROR' };
 
 	it('tries to get the text from non existing dictionary', () => {
 		expect(Text.get('non_existing')).to.be.equal('[non_existing]');
@@ -112,6 +125,9 @@ describe('Dictionaries', () => {
 		expect(Text.get('relation_variable', 6)).to.be.equal('RELATION VARIABLE 6');
 		expect(Text.get('fn_count', 3)).to.be.equal('3 variables');
 		expect(Text.get('fn_gender', 'female')).to.be.equal('Her variable');
+		for (const [status, result] of Object.entries(statuses)) {
+			expect(Text.get(Text.key('status', status))).to.be.equal(result);
+		}
 	});
 
 	it('formats the text using format method and the key in dictionary', () => {

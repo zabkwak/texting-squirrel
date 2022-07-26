@@ -16,7 +16,7 @@ Text.addDictionary('test', { module_name: 'Texting Squirrel' });
 Text.setDictionary('test');
 
 console.log(Text.get('module_name')); // will output Texting Squirrel
-console.log(Text.format('I am using {module_name} module')); // will output I am using Texting Squirrel
+console.log(Text.format('I am using {module_name} module')); // will output I am using Texting Squirrel module
 ```
 
 ### Mode

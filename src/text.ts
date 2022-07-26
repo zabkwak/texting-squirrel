@@ -27,15 +27,6 @@ export default class Text {
 	}
 
 	/**
-	 * Gets the current mode of the Text class.
-	 *
-	 * @returns The current mode of the Text class.
-	 */
-	public getMode(): TMode {
-		return this._mode;
-	}
-
-	/**
 	 * Adds the new dictionary.
 	 *
 	 * @param  key Key with which is the dictionary accessible to format texts. If it's an object, the key is default.
@@ -49,16 +40,6 @@ export default class Text {
 		}
 		this._dictionaries[key] = new Dictionary(key, dictionary);
 		return this;
-	}
-
-	/**
-	 * Gets the dictionary by the key.
-	 *
-	 * @param key Key of the dictionary.
-	 * @returns Dictionary instance or null.
-	 */
-	public getDictionary(key: string = this._dictionary): Dictionary {
-		return this._dictionaries[key] || null;
 	}
 
 	/**
@@ -86,6 +67,10 @@ export default class Text {
 	public addFunction(name: string, fn: (...args: any[]) => string): this {
 		this._functions[name] = fn;
 		return this;
+	}
+
+	public key(...fragments: any[]): string {
+		return fragments.join('_');
 	}
 
 	/**
@@ -135,6 +120,25 @@ export default class Text {
 				: `[${key}]`;
 		}
 		return this.format(dictionary.getValue(key), ...args);
+	}
+
+	/**
+	 * Gets the dictionary by the key.
+	 *
+	 * @param key Key of the dictionary.
+	 * @returns Dictionary instance or null.
+	 */
+	public getDictionary(key: string = this._dictionary): Dictionary {
+		return this._dictionaries[key] || null;
+	}
+
+	/**
+	 * Gets the current mode of the Text class.
+	 *
+	 * @returns The current mode of the Text class.
+	 */
+	public getMode(): TMode {
+		return this._mode;
 	}
 
 	/**
