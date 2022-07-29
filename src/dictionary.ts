@@ -1,11 +1,11 @@
-export default class Dictionary {
+export default class Dictionary<T = any> {
 
 	public static DEFAULT = 'default';
 
 	private _key: string;
-	private _data: { [key: string]: string };
+	private _data: Record<keyof T, string>;
 
-	constructor(key: string, data: { [key: string]: string }) {
+	constructor(key: string, data: Record<keyof T, string>) {
 		this._key = key;
 		this._data = data;
 	}
@@ -15,7 +15,7 @@ export default class Dictionary {
 	 *
 	 * @param key
 	 */
-	public hasValue(key: string): boolean {
+	public hasValue<K extends keyof T>(key: K): boolean {
 		return this.getValue(key) !== null;
 	}
 
@@ -38,7 +38,7 @@ export default class Dictionary {
 	 *
 	 * @param key
 	 */
-	public getValue(key: string): string {
+	public getValue<K extends keyof T>(key: K): string {
 		return this._data[key] || null;
 	}
 }

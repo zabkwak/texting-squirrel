@@ -50,7 +50,9 @@ describe('Built-in functions', () => {
 		});
 
 		it('formats the text with multiple count functions', () => {
-			expect(Text.format('{count(0,test,tests,tests)} {count(1,test,tests,tests)} {count(2,test,tests,tests)}', 1, 2, 4)).to.be.equal('1 test 2 tests 4 tests');
+			expect(
+				Text.format('{count(0,test,tests,tests)} {count(1,test,tests,tests)} {count(2,test,tests,tests)}', 1, 2, 4),
+			).to.be.equal('1 test 2 tests 4 tests');
 		});
 	});
 
@@ -65,12 +67,16 @@ describe('Built-in functions', () => {
 		});
 
 		it('formats the text with multiple gender functions', () => {
-			expect(Text.format('{gender(0,He,She,He/She)} has to read {gender(1,his,her,his/her)} book', 'male', 'female')).to.be.equal('He has to read her book');
+			expect(
+				Text.format('{gender(0,He,She,He/She)} has to read {gender(1,his,her,his/her)} book', 'male', 'female'),
+			).to.be.equal('He has to read her book');
 		});
 	});
 
 	it('formats the text using count and gender functions', () => {
-		expect(Text.format('{gender(0,He,She,He/She)} is learning {count(1,language,languages,languages)}', 'male', 2)).to.be.equal('He is learning 2 languages');
+		expect(
+			Text.format('{gender(0,He,She,He/She)} is learning {count(1,language,languages,languages)}', 'male', 2),
+		).to.be.equal('He is learning 2 languages');
 	});
 
 	it('tries to format the text with invalid function', () => {
@@ -99,7 +105,7 @@ describe('Custom functions', () => {
 
 describe('Dictionaries', () => {
 
-	Text.addDictionary({
+	const DICTIONARY = {
 		key: 'KEY',
 		variable: 'VARIABLE {0}',
 		relation: 'RELATION {key}',
@@ -108,7 +114,9 @@ describe('Dictionaries', () => {
 		fn_gender: '{gender(0,His,Her,His/Her)} variable',
 		status_ok: 'OK',
 		status_error: 'ERROR',
-	});
+	};
+
+	Text.addDictionary(DICTIONARY);
 
 	const statuses = { ok: 'OK', error: 'ERROR' };
 
@@ -119,14 +127,14 @@ describe('Dictionaries', () => {
 	});
 
 	it('gets the values from dictionary', () => {
-		expect(Text.get('key')).to.be.equal('KEY');
-		expect(Text.get('variable', 5)).to.be.equal('VARIABLE 5');
-		expect(Text.get('relation')).to.be.equal('RELATION KEY');
-		expect(Text.get('relation_variable', 6)).to.be.equal('RELATION VARIABLE 6');
-		expect(Text.get('fn_count', 3)).to.be.equal('3 variables');
-		expect(Text.get('fn_gender', 'female')).to.be.equal('Her variable');
+		expect(Text.get<typeof DICTIONARY>('key')).to.be.equal('KEY');
+		expect(Text.get<typeof DICTIONARY>('variable', 5)).to.be.equal('VARIABLE 5');
+		expect(Text.get<typeof DICTIONARY>('relation')).to.be.equal('RELATION KEY');
+		expect(Text.get<typeof DICTIONARY>('relation_variable', 6)).to.be.equal('RELATION VARIABLE 6');
+		expect(Text.get<typeof DICTIONARY>('fn_count', 3)).to.be.equal('3 variables');
+		expect(Text.get<typeof DICTIONARY>('fn_gender', 'female')).to.be.equal('Her variable');
 		for (const [status, result] of Object.entries(statuses)) {
-			expect(Text.get(Text.key('status', status))).to.be.equal(result);
+			expect(Text.get<typeof DICTIONARY>(Text.key('status', status))).to.be.equal(result);
 		}
 	});
 

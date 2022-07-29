@@ -69,8 +69,17 @@ export default class Text {
 		return this;
 	}
 
-	public key(...fragments: any[]): string {
-		return fragments.join('_');
+	/**
+	 * Creates the key from fragments.
+	 *
+	 * Joins the fragments with `_` char.
+	 *
+	 * @param fragments The fragments to join.
+	 * @returns Joined key.
+	 * @typeparam `T` - Type of the dictionary object -> `typeof { key: 'value' }`.
+	 */
+	public key<T = any>(...fragments: any[]): keyof T {
+		return fragments.join('_') as keyof T;
 	}
 
 	/**
@@ -80,21 +89,24 @@ export default class Text {
 	 * @param key Key of the text in the dictionary.
 	 * @param args Arguments to pass in format method.
 	 * @returns Formatted text.
+	 * @typeparam `T` - Type of the dictionary object -> `typeof { key: 'value' }`.
 	 */
-	public get(key: string, ...args: any[]): string {
-		let dictionary = this.getDictionary() || this.getDictionary(Dictionary.DEFAULT);
+	public get<T = any>(key: keyof T, ...args: any[]): string {
+		let dictionary: Dictionary<T> = this.getDictionary() || this.getDictionary(Dictionary.DEFAULT);
 		if (!dictionary) {
 			this._warn('No dictionary set');
-			return '';
+			return this._mode === 'production'
+				? ''
+				: `[${key as string}]`;
 		}
 		if (!dictionary.hasValue(key) && !dictionary.isDefault()) {
 			dictionary = this.getDictionary(Dictionary.DEFAULT);
 		}
 		if (!dictionary.hasValue(key)) {
-			this._warn(`Key '${key}' not found in dictionary '${dictionary.getKey()}'`);
+			this._warn(`Key '${key as string}' not found in dictionary '${dictionary.getKey()}'`);
 			return this._mode === 'production'
 				? ''
-				: `[${key}]`;
+				: `[${key as string}]`;
 		}
 		return this.format(dictionary.getValue(key), ...args);
 	}
@@ -107,17 +119,18 @@ export default class Text {
 	 * @param key Key of the text in the dictionary.
 	 * @param args Arguments to pass in format method.
 	 * @returns Formatted text.
+	 * @typeparam `T` - Type of the dictionary object -> `typeof { key: 'value' }`.
 	 */
-	public getFromDictionary(dictionaryKey: string, key: string, ...args: any[]): string {
+	public getFromDictionary<T = any>(dictionaryKey: string, key: keyof T, ...args: any[]): string {
 		const dictionary = this.getDictionary(dictionaryKey);
 		if (!dictionary) {
 			throw new Error(`Dictionary '${dictionaryKey}' doesn't exist.`);
 		}
 		if (!dictionary.hasValue(key)) {
-			this._warn(`Key '${key}' not found in dictionary '${dictionary.getKey()}'`);
+			this._warn(`Key '${key as string}' not found in dictionary '${dictionary.getKey()}'`);
 			return this._mode === 'production'
 				? ''
-				: `[${key}]`;
+				: `[${key as string}]`;
 		}
 		return this.format(dictionary.getValue(key), ...args);
 	}
